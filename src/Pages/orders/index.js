@@ -1,14 +1,17 @@
-import HeaderSection from "@aio/components/HeaderSection";
 
-const Profile = (props) => {
+import HeaderSection from "@aio/components/HeaderSection";
+import Tables from "@aio/components/Table";
+
+
+const Order = () => {
     return (
         <>
             <HeaderSection 
-                heading={'Hallo Admin'}
-               
+                heading={'Order'}
             />
+        <Tables />
         </>
     );
 }
 
-export default Profile;
+export default Order;

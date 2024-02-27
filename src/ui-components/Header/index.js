@@ -1,9 +1,6 @@
-import { useRef } from "react";
-import {
-  IoNotificationsOutline,
-} from "react-icons/io5";
+;
 import DropdownMenu from "../DropdownMenu";
-import IconWrapper from "../IconWrapper";
+
 import UserIcon from "../UserIcon";
 import styles from "./Header.module.css";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
@@ -38,29 +35,6 @@ const MenuList = ({ href = "", Icon = null, text = "" }) => {
   );
 };
 
-const NotificationsIcon = ({ onClick = () => {} }) => (
-  <IconWrapper
-    onClick={onClick}
-    style={{
-      top: "2px",
-      fontSize: "20px",
-    }}
-  >
-    <IoNotificationsOutline />
-  </IconWrapper>
-);
-
-const NotificationList = ({ img = null, desc = "", datetime = "" }) => {
-  return (
-    <li>
-      {img && <img src={img} alt="" />}
-      <div className={styles["single-notification"]}>
-        <p>{desc}</p>
-        <p>{datetime}</p>
-      </div>
-    </li>
-  );
-};
 
 const Header = ({ toggleSidebarMenu }) => {
   return (
@@ -80,16 +54,7 @@ const Header = ({ toggleSidebarMenu }) => {
               Dashboard
             </Link>
           </li>
-          <li>
-            <Link href={'/'}>
-              Users
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'}>
-              Settings
-            </Link>
-          </li>
+         
         </ul>
       </div>
       <div className={styles["right-items"]}>
@@ -110,42 +75,6 @@ const Header = ({ toggleSidebarMenu }) => {
             </DropdownMenu>
           </li>
 
-          <li>
-            <DropdownMenu 
-              CustomMenu={NotificationsIcon} 
-              count={4}
-              screenCenter={false}
-              >
-              <div className={styles["notification-container"]}>
-    
-                <div className={`flex justify-sb ${styles["notification-header"]}`}>
-                  <h3>Notifications</h3>
-                  <p style={{ color: "blue", fontWeight: "bold" }}>
-                    Mark all as Read
-                  </p>
-                </div>
-                <div className={styles["notification-body"]}>
-                  <ul className={styles["notification-tabs"]}>
-                      <li className={styles['active']}>All</li>
-                      <li>Following</li>
-                      <li>Archeive</li>
-                    </ul>
-                  <ul className={styles["notification-tab"]}>
-                    {[0, 1, 2].map((notification, i) => (
-                      <NotificationList 
-                        key={i}
-                        img={`https://cdn.pixabay.com/photo/2017/03/19/20/19/ball-2157465__340.png`}
-                        desc={'Jacob jone mwntion you in rewrite button tab'}
-                        datetime={'1:12pm'}
-                      />
-                    ))}
-                  
-                </ul>
-                </div>
-                
-              </div>
-            </DropdownMenu>
-          </li>
 
           <li>
             {/* User Dropdown Menu */}

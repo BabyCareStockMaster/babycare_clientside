@@ -1,10 +1,10 @@
 import Layout from "../src/ui-components/layout";
-import TestComponents from "../src/Pages/test-components";
+import Order from "../src/Pages/orders/index";
 
 export default () => {
     return (
         <Layout>
-            <TestComponents />
+            <Order />
         </Layout>
     );
 }

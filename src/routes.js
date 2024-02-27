@@ -6,7 +6,7 @@ import { AiOutlineBarChart } from "react-icons/ai";
 export default [
     {
         to: '/',
-        name: 'Home',
+        name: 'Dashboard',
         Icon: IoHomeOutline
     },
     {
@@ -15,13 +15,13 @@ export default [
         Icon: BiUserCircle
     },
     {
-        to: '/dashboard',
-        name: 'Dashboard',
+        to: '/warehouse',
+        name: 'Warehouse',
         Icon: BsSpeedometer2
     },
     {
-        to: '/test-components',
-        name: 'Test Components',
+        to: '/orders',
+        name: 'Order',
         Icon: IoGridOutline
     },
     {

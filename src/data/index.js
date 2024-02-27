@@ -8,21 +8,7 @@ export const menuList = [
     Icon: FiUser,
     href: "/profile",
   },
-  {
-    text: "Integrations",
-    Icon: IoExtensionPuzzleOutline,
-    href: "/settings",
-  },
-  {
-    text: "Guide",
-    Icon: AiOutlineFileText,
-    href: "/guide",
-  },
-  {
-    text: "Help Center",
-    Icon: FiHelpCircle,
-    href: "help-center",
-  },
+
   {
     text: "Logout",
     Icon: FiLogOut,

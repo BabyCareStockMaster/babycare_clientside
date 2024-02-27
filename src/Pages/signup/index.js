@@ -10,7 +10,7 @@ const Signup = () => {
         <section className={styles["login-container"]}>
           <div className={styles["brand-container"]}>
             <Logo />
-            <div className={styles['logo-explain']}>AIO Dashboard</div>
+            <div className={styles['logo-explain']}>Babycare Dashboard</div>
           </div>
 
           {/* login form */}

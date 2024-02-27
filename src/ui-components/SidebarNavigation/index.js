@@ -21,7 +21,7 @@ const SidebarNavigation = ({
       </button>
       <div className={styles['logo-container']}>
         <Logo />
-        <div className={styles['logo-explain']}>AIO Dashboard</div>
+        <div className={styles['logo-explain']}>Babycare Dashboard</div>
       </div>
       <ul className={styles["sidebar-container"]}>
         {routes.map((page, index) => (
@@ -36,10 +36,6 @@ const SidebarNavigation = ({
 
       <ul className={styles["sidebar-footer"]}>
         {/* <button onClick={toggleSidebarMenu}>close</button> */}
-          <li className={styles["footer-item"]}> 
-            <TbLogout />
-            <span>Logouts</span>
-          </li>
           
       </ul>
     </section>
