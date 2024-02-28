@@ -20,7 +20,7 @@ const Warehouse = () => {
                        <Td>1</Td>
                        <Td>Gudang 1</Td>
                         <Td>Popol</Td>
-                        <Td>200</Td>
+                        <Td>200 </Td>
                         <Td>
                             <IconButton
                                 aria-label="Edit"
