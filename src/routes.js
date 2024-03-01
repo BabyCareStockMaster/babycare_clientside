@@ -4,8 +4,9 @@ import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineBarChart } from "react-icons/ai";
 
 export default [
+    
     {
-        to: '/',
+        to: '/dashboard',
         name: 'Dashboard',
         Icon: IoHomeOutline
     },
