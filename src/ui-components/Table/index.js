@@ -9,9 +9,9 @@ const Tables = () => {
     async function fetchOrderData() {
         const response = await fetch("http://localhost:4000/api/orders");
         const data = await response.json();
-        console.log(data)
         console.log(data.rows)
-        setOrderData(data.rows); // Set order data to the rows array
+        setOrderData(data.rows); 
+        // Set order data to the rows array
         setIsLoading(false);
     }
 
@@ -42,7 +42,7 @@ const Tables = () => {
                     {orderData.map((order, index) => (
                         <Tr key={index}>
                             <Td>{order.id}</Td>
-                            <Td>{order.user_id}</Td>
+                            <Td>{order.User.first_name} {order.User.last_name}</Td>
                             <Td>{order.status}</Td>
                             <Td>{order.total_item}</Td>
                             <Td>{order.total_price}</Td>
@@ -64,7 +64,9 @@ const Tables = () => {
                                 />
                             </Td>
                         </Tr>
+                      
                     ))}
+
                 </Tbody>
             </Table>
         </Box>
