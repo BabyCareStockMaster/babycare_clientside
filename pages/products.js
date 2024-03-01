@@ -1,8 +1,8 @@
-import Statistics from "../src/Pages/Statistics";
+import Products from "../src/Pages/Products";
 import Layout from "../src/ui-components/layout";
 
 export default () => (
     <Layout>
-        <Statistics />
+       <Products/>
     </Layout>
 )

@@ -3,8 +3,54 @@ import FullButton from "@aio/components/FullButton";
 import Input from "@aio/components/Input";
 import Logo from "@aio/components/Logo";
 import styles from "./login.module.css";
+import { useState } from "react";
+import { useRouter } from "next/router";
+
 
 const Login = () => {
+  
+    // Router
+    const router = useRouter();
+    
+    // States
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+
+    // Submit Form
+    const SubmitForm = async (e) => {
+        e.preventDefault();
+
+        // Send Request Store Cart
+        const reqOption = {
+            method: "POST",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify({email, password})
+        }   
+        
+        // Request
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/admin/login`, reqOption);
+        const result = await response.json();
+        console.log("here", result);
+        if(result.error)
+        {
+            // To Login
+            router.replace('/')
+        }
+
+        // Add Token
+        if(localStorage.getItem('token') == null && result.token)
+        {
+            localStorage.setItem('token', result.token);
+
+            // To Dashboard
+            router.replace('/dashboard')
+        }   
+
+        // Set Clear All
+        // setPassword("");
+        // setEmail("");
+    }
+
   return (
       <div className={styles.container}>
         <section className={styles["login-container"]}>
@@ -14,7 +60,7 @@ const Login = () => {
           </div>
 
           {/* login form */}
-          <div className={styles["form-container"]}>
+          <div className={styles["form-container"]} >
             <div className="t-center" style={{ margin: "15px 0" }}>
               <div className={styles["sm-brand-container"]}>
                 <Logo />
@@ -24,10 +70,11 @@ const Login = () => {
             </div>
             <div>
               <Input
+              onSubmit = {SubmitForm}
                 inputContainerStyle={{ padding: "15px 30px" }}
                 type="text"
                 placeholder="Email"
-                onChange={(e) => console.log(e)}
+                onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 label={"Email"}
               />
@@ -35,11 +82,11 @@ const Login = () => {
                 inputContainerStyle={{ padding: "15px 30px" }}
                 type="password"
                 placeholder="Password"
-                onChange={(e) => console.log(e)}
+                onChange={(e) => setPassword(e.target.value)}
                 name="email"
                 label={"Email"}
               />
-              <FullButton label={"Login"} />
+              <FullButton type="submit" label={"Login"} />
 
               <p className="tc-grey t-center">
                 Dont have an account?{" "}

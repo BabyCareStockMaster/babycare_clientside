@@ -61,7 +61,7 @@ const Warehouse = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {warehouseStockData.map((item) =>
+          {warehouseStockData.map((item) => 
             item.Products.map((items) => (
               <Tr>
                 <Td>{item.name}</Td>
