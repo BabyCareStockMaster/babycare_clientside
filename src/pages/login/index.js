@@ -26,6 +26,7 @@ const Login = () => {
       }   
       
       // Request
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/admin/login`, reqOption);
       const result = await response.json();
       console.log("here", result);
