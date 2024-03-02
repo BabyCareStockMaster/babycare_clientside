@@ -1,13 +1,34 @@
-import styles from "./Table.module.css";
 import { Box, IconButton, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useEffect, useState } from "react";
+
 const Tables = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [orderData, setOrderData] = useState([]);
+
+    async function fetchOrderData() {
+        const response = await fetch("http://localhost:4000/api/orders");
+        const data = await response.json();
+        console.log(data.rows)
+        setOrderData(data.rows); 
+        // Set order data to the rows array
+        setIsLoading(false);
+    }
+
+    useEffect(() => {
+        fetchOrderData();
+    }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
     return (
-      <Box overflowX="auto">
+        <Box overflowX="auto">
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <Th>No</Th>
+                        <Th>Id</Th>
                         <Th>Nama USer</Th>
                         <Th>Status</Th>
                         <Th>Total Item</Th>
@@ -18,36 +39,37 @@ const Tables = () => {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr >
-                       <Td>1</Td>
-                       <Td>Dhoe</Td>
-                        <Td>online</Td>
-                        <Td>5</Td>
-                        <Td>200</Td>
-                        <Td>Jl. Pahlawan</Td>
-                        <Td>12345</Td>
-                        <Td>
-                            <IconButton
-                                aria-label="Edit"
-                                icon={<EditIcon />}
-                                mr={2}
-                                variant="ghost"
-                                colorScheme="blue"
-                            />
-                            <IconButton
-                                aria-label="Delete"
-                                icon={<DeleteIcon />}
-                                variant="ghost"
-                                colorScheme="red"
-                            />
-                        </Td>
-                    </Tr>
-                    {/* Add more rows as needed */}
+                    {orderData.map((order, index) => (
+                        <Tr key={index}>
+                            <Td>{order.id}</Td>
+                            <Td>{order.User.first_name} {order.User.last_name}</Td>
+                            <Td>{order.status}</Td>
+                            <Td>{order.total_item}</Td>
+                            <Td>{order.total_price}</Td>
+                            <Td>{order.address}</Td>
+                            <Td>{order.tracking_code}</Td>
+                            <Td>
+                                <IconButton
+                                    aria-label="Edit"
+                                    icon={<EditIcon />}
+                                    mr={2}
+                                    variant="ghost"
+                                    colorScheme="blue"
+                                />
+                                <IconButton
+                                    aria-label="Delete"
+                                    icon={<DeleteIcon />}
+                                    variant="ghost"
+                                    colorScheme="red"
+                                />
+                            </Td>
+                        </Tr>
+                      
+                    ))}
+
                 </Tbody>
             </Table>
         </Box>
-     
-
     );
 }
 

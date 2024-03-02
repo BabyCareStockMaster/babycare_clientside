@@ -4,14 +4,15 @@ import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineBarChart } from "react-icons/ai";
 
 export default [
+    
     {
-        to: '/',
+        to: '/dashboard',
         name: 'Dashboard',
         Icon: IoHomeOutline
     },
     {
         to: '/profile',
-        name: 'Profile',
+        name: 'User',
         Icon: BiUserCircle
     },
     {
@@ -25,8 +26,8 @@ export default [
         Icon: IoGridOutline
     },
     {
-        to: '/statistics',
-        name: 'Statistics',
+        to: '/products',
+        name: 'Products',
         Icon: AiOutlineBarChart
     }
 ];

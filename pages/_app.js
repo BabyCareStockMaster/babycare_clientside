@@ -1,4 +1,4 @@
-import '../src/styles/globals.css'
+import "src/styles/globals.css";
 
 // pages/_app.js
 import { ChakraProvider } from '@chakra-ui/react'

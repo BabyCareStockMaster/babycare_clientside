@@ -1,45 +1,98 @@
-import { useRef, useEffect } from "react";
-import Chart from "chart.js/auto";
+import { useRef, useEffect, useState } from "react";
+import Chart from 'chart.js/auto'; // For Chart.js 3.x
 
-const BarChartExample = (props) => {
-  const chartRef = useRef();
-  const chartObj = useRef();
+const Barchart = () => {
 
-  const createBarChart = (el) => {
-    const data = [
-      { year: 2010, count: 10 },
-      { year: 2011, count: 20 },
-      { year: 2012, count: 15 },
-      { year: 2013, count: 25 },
-      { year: 2014, count: 22 },
-      { year: 2015, count: 30 },
-      { year: 2016, count: 28 },
-    ];
+    // Reference
+    const ChartRef = useRef(null)
 
-    chartObj.current = new Chart(el, {
-      type: "bar",
-      data: {
-        labels: data.map((row) => row.year),
-        datasets: [
-          {
-            label: "Acquisitions by year",
-            data: data.map((row) => row.count),
-          },
-        ],
-      },
-    });
-  };
+    // State
+    let warehouse = [];
+    let products = [];
+    
+    useEffect( () => {
 
-  useEffect(() => {
-    const el = chartRef.current;
-    //const el = document.getElementById("chart");
-    if (chartObj.current) chartObj.current.destroy();
-    createBarChart(el);
+        async function fetchMyAPI() {
 
-    return () => chartObj.current.destroy();
-  }, []);
+            // // Send Request Store Cart
+            const reqOption = {
+                method: "GET",
+                // headers: {
+                //             "Content-Type" : "application/json", 
+                //             'Authorization': 'Bearer ' + localStorage.getItem('token') 
+                //         },
+            }   
+            
+            // Request
+            const response = await fetch(`http://localhost:4000/api/warehousestock/`);
+            const data = await response.json();
+            
+            // Save Data
+            // setStock(data.data);
 
-  return <canvas ref={chartRef}></canvas>;
-};
+            // Setting Stock and Name
+            data.data.forEach((item) => {
+                if(!warehouse.includes(item.name) || !products.includes(item.Products.length))
+                {
+                    warehouse.push(item.name);
+                    products.push(item.Products.length)
+                }
+            });
 
-export default BarChartExample;
+            if(ChartRef.current){
+                if(ChartRef.current.chart){
+                    ChartRef.current.chart.destroy()
+                }
+
+                // New Chart
+                const context = ChartRef.current.getContext("2d");
+
+                // Chart
+                const newChart = new Chart(context, {
+                    type: "bar",
+                    data: {
+                        labels: warehouse,
+                        datasets: [
+                            {
+                                label: "stok",
+                                data: products,
+                                backgroundColor: [
+                                    "rgb(75, 192, 192, 0.2)",
+                                    "rgb(255, 205, 86, 0.2)",
+                                    "rgb(255, 99, 132, 0.2)",
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: "category"
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                ChartRef.current.chart = newChart
+            }
+
+        }
+
+        fetchMyAPI();
+
+    }, [])
+
+    return (
+        <>
+            <div className="bg-white h-full flex items-center rounded-lg">
+                <canvas ref={ChartRef}></canvas>
+            </div>
+        </>
+    );
+}
+ 
+export default Barchart;
